@@ -175,6 +175,10 @@
 
 ![love-and-deepspace](https://count.getloli.com/@demo?theme=love-and-deepspace)
 
+##### miku
+
+![miku](https://count.getloli.com/@demo?theme=miku)
+
 ##### minecraft
 
 ![minecraft](https://count.getloli.com/@demo?theme=minecraft)
@@ -227,6 +231,10 @@
 
 ![sketch-2](https://count.getloli.com/@demo?theme=sketch-2)
 
+##### yousa-ling
+
+![yousa-ling](https://count.getloli.com/@demo?theme=yousa-ling)
+
 </details>
 
 ## Demo
@@ -238,22 +246,48 @@ For information on counter usage and configuration, refer to the [demo website](
 
 ## Usage
 
-### Install
+### Using Docker (Recommended)
 
-#### Run on Glitch
+Pull the pre-built image from GitHub Container Registry:
 
-- Open [Glitch project](https://glitch.com/~moe-counter-api)
-- Just hit the **Remix your own** button
-- That's it!
+```shell
+$ docker pull ghcr.io/journey-ad/moe-counter:latest
+```
 
-#### Deploying on your own server
+Run with Docker:
+
+```shell
+$ docker run -d -p 3000:3000 \
+  -v $(pwd)/data:/app/data \
+  -e APP_PORT=3000 \
+  -e DB_TYPE=sqlite \
+  ghcr.io/journey-ad/moe-counter:latest
+```
+
+Or use docker-compose:
+
+```yaml
+version: '3'
+services:
+  moe-counter:
+    image: ghcr.io/journey-ad/moe-counter:latest
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./data:/app/data
+    environment:
+      - APP_PORT=3000
+      - DB_TYPE=sqlite
+```
+
+### Deploying from Source
 
 ```shell
 $ git clone https://github.com/journey-ad/Moe-Counter.git
 $ cd Moe-Counter
 $ pnpm install
 
-$ pnpm run start
+$ pnpm start
 ```
 
 ### Configuration
@@ -285,7 +319,6 @@ LOG_LEVEL=debug
 
 ## Credits
 
-* [Glitch](https://glitch.com/)
 * [A-SOUL_Official](https://space.bilibili.com/703007996)
 * [moebooru](https://github.com/moebooru/moebooru)
 * gelbooru.com NSFW
