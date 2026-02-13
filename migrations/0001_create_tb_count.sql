@@ -1,0 +1,4 @@
+CREATE TABLE IF NOT EXISTS tb_count (
+  name TEXT PRIMARY KEY,
+  num INTEGER NOT NULL DEFAULT 0 CHECK (num >= 0)
+);

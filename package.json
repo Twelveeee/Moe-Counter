@@ -1,27 +1,25 @@
 {
-  "name": "moe-counter",
+  "name": "moe-counter-cloudflare",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Moe Counter for Cloudflare Worker + D1/Upstash and Vercel + Upstash",
+  "private": true,
+  "type": "module",
   "scripts": {
-    "start": "node index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build:manifest": "node scripts/build-theme-manifest.mjs",
+    "dev:worker": "pnpm build:manifest && wrangler dev --config wrangler.toml.example",
+    "dev:vercel": "pnpm build:manifest && pnpm dlx vercel@latest dev",
+    "test": "echo \"No tests configured\""
   },
   "keywords": [],
-  "author": "journey-ad",
+  "author": "Twelveeee",
   "license": "MIT",
   "dependencies": {
-    "better-sqlite3": "^12.6.2",
-    "compression": "^1.8.0",
-    "dotenv": "^16.5.0",
-    "express": "^4.21.2",
     "image-size": "^0.8.3",
-    "ioredis": "^5.4.1",
     "mime-types": "^2.1.35",
-    "mongoose": "^8.15.1",
-    "mysql2": "^3.11.5",
-    "pug": "^3.0.3",
     "zod": "^3.25.61"
+  },
+  "devDependencies": {
+    "wrangler": "^4.29.1"
   },
   "engines": {
     "node": ">=22",

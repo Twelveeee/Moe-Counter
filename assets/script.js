@@ -149,8 +149,8 @@
 
   const lazyLoadOptions = {
     selector: 'img[data-src]:not([src])',
-    loading: `${__global_data.site}/img/loading.svg`,
-    failed: `${__global_data.site}/img/failed.svg`,
+    loading: `${__global_data.site}/assets/img/loading.svg`,
+    failed: `${__global_data.site}/assets/img/failed.svg`,
     rootMargin: '200px',
     threshold: 0.01
   };
