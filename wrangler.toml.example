@@ -1,0 +1,19 @@
+name = "moe-counter-cloudflare"
+main = "src/worker.js"
+compatibility_date = "2026-02-13"
+workers_dev = true
+
+[assets]
+directory = "./assets"
+binding = "ASSETS"
+
+# Put runtime vars in `.env` / `.dev.vars` or Cloudflare dashboard:
+# DB_DRIVER, LOG_LEVEL, APP_SITE, GA_ID, COUNTER_PREFIX,
+# UPSTASH_REDIS_REST_URL, UPSTASH_REDIS_REST_TOKEN
+#
+# If you want to run D1 mode with local wrangler, add and fill:
+# [[d1_databases]]
+# binding = "DB"
+# database_name = "moe-counter"
+# database_id = "REPLACE_WITH_D1_DATABASE_ID"
+# migrations_dir = "migrations"

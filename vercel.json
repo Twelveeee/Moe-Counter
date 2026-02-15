@@ -1,13 +1,9 @@
 {
-  "version": 2,
-  "buildCommand": "pnpm build:manifest",
-  "routes": [
+  "framework": null,
+  "rewrites": [
     {
-      "handle": "filesystem"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/api/index.js"
+      "source": "/((?!assets/).*)",
+      "destination": "/api/index.js"
     }
   ]
 }
