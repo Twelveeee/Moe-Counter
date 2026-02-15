@@ -1,6 +1,7 @@
 name = "moe-counter-cloudflare"
 main = "src/worker.js"
 compatibility_date = "2026-02-13"
+compatibility_flags = ["nodejs_compat"]
 workers_dev = true
 
 [assets]
