@@ -2,8 +2,37 @@ html {
   scroll-padding: 50px 0;
 }
 
+body {
+  position: relative;
+}
+
+.lang-switch {
+  position: absolute;
+  top: 0.15em;
+  right: 0;
+  display: flex;
+  align-items: center;
+  margin: 0;
+  font-size: 0.8rem;
+
+  label {
+    display: none;
+  }
+
+  select {
+    margin: 0;
+    min-width: 84px;
+    height: auto;
+    padding: 0.2em 1.25em 0.2em 0.45em;
+    border-radius: 6px;
+    font-size: 0.78rem;
+    line-height: 1.2;
+    background: transparent;
+  }
+}
+
 #main_title {
-  margin-top: 0.5em;
+  margin-top: 0.9em;
 }
 
 #themes {
@@ -239,5 +268,16 @@ table {
 @media screen and (max-width: 900px) {
   iframe {
     display: none;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .lang-switch {
+    top: 0;
+    right: 0;
+  }
+
+  #main_title {
+    margin-top: 1.05em;
   }
 }

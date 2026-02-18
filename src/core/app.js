@@ -52,10 +52,12 @@ export async function handleAppRequest(request, runtime) {
       const manifest = await getThemeManifest(assets);
       const site = env.APP_SITE || `${url.protocol}//${url.host}`;
       const gaId = env.GA_ID || "";
+      const lang = normalizeLang(url.searchParams.get("lang"));
 
       const html = renderIndexPage({
         site,
         gaId,
+        lang,
         themeNames: Object.keys(manifest.themes || {}),
       });
 
@@ -174,6 +176,10 @@ export async function handleAppRequest(request, runtime) {
     logger.error("request failed", error);
     return withCors(internalServerError(), request);
   }
+}
+
+function normalizeLang(rawLang) {
+  return rawLang === "zh" ? "zh" : "en";
 }
 
 function withCors(response, request) {

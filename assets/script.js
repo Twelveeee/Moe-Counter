@@ -2,6 +2,8 @@
   const btn = document.getElementById('get');
   const img = document.getElementById('result');
   const code = document.getElementById('code');
+  const langSelect = document.getElementById('lang_select');
+  const requiredNameMessage = (__global_data && __global_data.messages && __global_data.messages.requiredName) || 'Please input counter name.';
 
   const elements = {
     name: document.getElementById('name'),
@@ -16,6 +18,16 @@
     prefix: document.getElementById('prefix')
   };
 
+  if (langSelect) {
+    langSelect.addEventListener('change', handleLanguageChange);
+  }
+
+  if (!btn || !img || !code) {
+    return;
+  }
+
+  hideResult({ clearSrc: true });
+
   btn.addEventListener('click', throttle(handleButtonClick, 500));
   code.addEventListener('click', selectCodeText);
 
@@ -27,11 +39,11 @@
   moreTheme.addEventListener('click', scrollToThemes);
 
   function handleButtonClick() {
-    const { name, theme, padding, offset, scale, pixelated, darkmode, num } = elements;
+    const { name, theme, padding, offset, align, scale, pixelated, darkmode, num, prefix } = elements;
     const nameValue = name.value.trim();
 
     if (!nameValue) {
-      alert('Please input counter name.');
+      alert(requiredNameMessage);
       return;
     }
 
@@ -56,10 +68,12 @@
     const query = new URLSearchParams(params).toString();
     const imgSrc = `${__global_data.site}/@${nameValue}?${query}`;
 
+    hideResult();
     img.src = `${imgSrc}&_=${Math.random()}`;
     btn.setAttribute('disabled', '');
 
     img.onload = () => {
+      img.style.display = 'block';
       img.scrollIntoView({ block: 'start', behavior: 'smooth' });
       code.textContent = imgSrc;
       code.style.visibility = 'visible';
@@ -75,9 +89,19 @@
           alert(message);
         }
       } finally {
+        hideResult();
         btn.removeAttribute('disabled');
       }
     };
+  }
+
+  function hideResult({ clearSrc = false } = {}) {
+    img.style.display = 'none';
+    code.style.visibility = 'hidden';
+    code.textContent = '';
+    if (clearSrc) {
+      img.removeAttribute('src');
+    }
   }
 
   function selectCodeText(e) {
@@ -98,6 +122,13 @@
       party.sparkles(moreTheme.querySelector('h3'), { count: party.variation.range(20, 40) });
       themes.scrollIntoView({ block: 'start', behavior: 'smooth' });
     }
+  }
+
+  function handleLanguageChange(event) {
+    const nextLang = event.target.value === 'zh' ? 'zh' : 'en';
+    const nextUrl = new URL(window.location.href);
+    nextUrl.searchParams.set('lang', nextLang);
+    window.location.assign(nextUrl.toString());
   }
 
   function throttle(fn, threshold = 250) {
